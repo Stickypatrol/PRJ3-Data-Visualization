@@ -7,12 +7,18 @@ open Coroutine
 Console.WindowWidth <- 150
 Console.WindowHeight <- 54
 
-let rec DrawGraph yadd =
-  Console.Clear()
+let generateSin x offset = int (20.0*sin (((float x) + offset)/10.0)) + 26
+
+let generateCos x offset = int (20.0*cos (((float x) + offset)/10.0)) + 26
+
+let generateTan x offset = int (10.0*tan (((float x) + offset)/10.0)) + 26
+
+
+let rec DrawGraph graph offset =
   for x in 1..149 do
-    let sine = int (25.0*sin (((float x) + yadd)/10.0)) + 26
-    if sine < 52 || sine > 1 then
-      Console.SetCursorPosition(x, sine)
+    let point = graph x offset
+    if point < 52 && point > 1 then
+      Console.SetCursorPosition(x, point)
       Console.Write('X')
 
 let rec drawloop yadd =
@@ -40,7 +46,10 @@ let plotA() =
 let plotB() =
   cor{
     let! s = getState
-    do DrawGraph s
+    do Console.Clear()
+    do DrawGraph generateSin s
+    do DrawGraph generateCos s
+    do DrawGraph generateTan s
     return ()
   }
 
@@ -53,7 +62,7 @@ let IncrState() =
   
 let A() =
   cor{
-    do! wait 0.05
+    do! wait 0.1
     do! plotB()
     do! IncrState()
   } |> repeat_
