@@ -2,7 +2,7 @@
 
 open System
 
-type Cor<'a, 's> = 's -> CorStep<'a, 's> //takes an 's (whatever it is) and returns either a DONE with a result and a new state (Done of 'a, 's) OR yield of new(Yield of new )
+type Cor<'a, 's> = 's -> CorStep<'a, 's> //takes an 's (whatever it is) and returns either a DONE with a result and a new state (Done of 'a, 's) OR yield of new coroutine and new state
 and CorStep<'a, 's> =
   | Done of 'a* 's
   | Yield of Cor<'a, 's>*'s
