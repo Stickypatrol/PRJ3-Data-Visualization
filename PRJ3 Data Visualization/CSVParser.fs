@@ -28,7 +28,7 @@ let getEOF =
 let readNumeric =
   parse{
     let! x = getHead
-    if x <= '9' && x >= '0' then
+    if x >= '0' && x <= '9' then
       return x
     else
       return! fail_ "error in trying Numeric check"
@@ -37,7 +37,7 @@ let readNumeric =
 let readAlphanum =
   parse{
     let! x = getHead
-    if (x <= 'a' && x >= 'z') || (x <= 'A' && x >= 'Z') then
+    if (x >= 'a' && x <= 'z') || (x >= 'A' && x <= 'Z') then
       return x
     else
       return! fail_ "error in trying Numeric check"

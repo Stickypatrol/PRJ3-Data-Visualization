@@ -23,6 +23,22 @@ type Trommel =
     Streetnumber  : int
   }
 
+type Neighbourhood =
+  {
+    ID        : int
+    Name      : string
+    Location  : string
+    District  : int
+  }
+
+type SubNeighbourhood =
+  {
+    ID            : int
+    Name          : string
+    Location      : string
+    Neighbourhood : int
+  }
+
 type District =
   {
     ID          : int
