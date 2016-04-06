@@ -78,10 +78,10 @@ let sampleprogram() beginstate =
 
 //do sampleprogram() 0.0
 
-let specialsymbols = ['/';':']
+let specialsymbols = ['/';':';'-';'.']
 
 let delimiter = ','
 
-let input = List.ofSeq <| "awdawdw,1231231,1/1/2009,10:00,"
+let input = List.ofSeq <| "awdawdw,1231231,1/1/2009,10:00"
 
-printfn "%A" (Tokenizer delimiter specialsymbols input)
+printfn "%A" (Lexer delimiter specialsymbols input)

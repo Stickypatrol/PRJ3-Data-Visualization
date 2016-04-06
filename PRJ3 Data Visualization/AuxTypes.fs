@@ -46,3 +46,20 @@ type District =
     Trommel     : List<int>
     Thefts      : List<int>
   }
+
+type Attribute =
+  | ID of int*int
+  | DATE of int*int*int
+  | TIME of int*int
+  | DISTRICT of int
+  | AREA of List<string>
+  | PLACE of int*string
+  | STREET of string
+  | DAY of string
+  | TIMERANGE of int*int*int*int
+  | BIKETYPE of string
+  | OBJECTTYPE of string
+  | BRAND of string
+  | BIKEMODEL of string
+  | COLOR of string
+  | INVALID
