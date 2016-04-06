@@ -1,5 +1,6 @@
 ﻿open System
 open CoroutineMonad
+open CSVParser
 
 //let sampledataGenerator x = [for y in 0.0 .. 0.05 .. 15.0 -> 10.0*(sin y - 20.0]
 
@@ -75,6 +76,12 @@ let rec costep c s =
 let sampleprogram() beginstate =
   costep (A()) beginstate
 
-do sampleprogram() 0.0
+//do sampleprogram() 0.0
 
-//do drawloop 0.3
+let specialsymbols = ['/';':']
+
+let delimiter = ','
+
+let input = List.ofSeq <| "awdawdw,1231231,1/1/2009,10:00,"
+
+printfn "%A" (Tokenizer delimiter specialsymbols input)
