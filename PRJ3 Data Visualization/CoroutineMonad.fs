@@ -1,4 +1,4 @@
-﻿module Coroutine
+﻿module CoroutineMonad
 
 open System
 

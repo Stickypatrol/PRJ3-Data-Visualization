@@ -47,7 +47,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="Coroutine.fs" />
+    <Compile Include="AuxTypes.fs" />
+    <Compile Include="CoroutineMonad.fs" />
+    <Compile Include="ParserMonad.fs" />
+    <Compile Include="CSVParser.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
   </ItemGroup>

@@ -1,5 +1,5 @@
 ﻿open System
-open Coroutine
+open CoroutineMonad
 
 //let sampledataGenerator x = [for y in 0.0 .. 0.05 .. 15.0 -> 10.0*(sin y - 20.0]
 
