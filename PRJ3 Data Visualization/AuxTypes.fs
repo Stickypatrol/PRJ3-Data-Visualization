@@ -3,16 +3,15 @@
 type Theft =
   {
     ID        : int
-    District  : int
+    District  : string
     Code      : string
     Location  : string
-    Date      : int*int*int
-    Time      : int*int*int
+    Date      : string
+    Time      : string
     Type      : string
     Brand     : string
     Colour    : string
   }
-
 type Trommel =
   {
     ID            : int

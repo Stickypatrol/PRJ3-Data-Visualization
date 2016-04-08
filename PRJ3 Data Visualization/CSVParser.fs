@@ -1,5 +1,7 @@
 ﻿module CSVParser
 
+//may not use this
+(*
 open System
 open ParserMonad
 open AuxTypes
@@ -315,5 +317,5 @@ let Parser() : Parser<'a, Token list> =
   parse{
     let! id = (checkID()) .|| (checkINVALID())
     let! date = (checkDATE()) .|| (checkINVALID())
-    let! //fill in the rest with the same structure
-  }
+    let! 
+  }*)
