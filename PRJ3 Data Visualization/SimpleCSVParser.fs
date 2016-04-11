@@ -61,13 +61,14 @@ let readString d =
 let rec SimplerLexer d = //for reading 1 line
   parse{
     let! x = readString d
+    do! checkDelimiter d
     let! xs = SimplerLexer d
     return x::xs
   }.||
   parse{
     do! checkDelimiter d
     let! xs = SimplerLexer d
-    return xs
+    return CSVTOKEN.INVALID::xs
   }.||
   parse{
     do! getEOF()
