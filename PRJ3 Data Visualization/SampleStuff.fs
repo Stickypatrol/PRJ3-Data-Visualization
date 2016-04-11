@@ -40,14 +40,14 @@ let rec drawloop yadd =
 
 let plotA() =
   cor{
-    let! s = getState//get the state
+    let! s = getCorState//get the state
     do drawloop s//draw a new graph with the state
     return ()//increment the state so we get a different graph from the last one
   }
 
 let plotB() =
   cor{
-    let! s = getState
+    let! s = getCorState
     do Console.Clear()
     do DrawGraph generateSin s
     do DrawGraph generateCos s
@@ -57,7 +57,7 @@ let plotB() =
 
 let IncrState() =
   cor{
-    let! s = getState
+    let! s = getCorState
     do! setState (s - 2.0)
     return ()
   }

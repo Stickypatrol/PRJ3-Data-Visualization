@@ -71,7 +71,7 @@ let rec SimplerLexer d = //for reading 1 line
     return CSVTOKEN.INVALID::xs
   }.||
   parse{
-    do! getEOF()
+    do! checkNewLine()
     return []
   }
 
@@ -120,3 +120,18 @@ let Transform lines =
 
 
 //following is the sample code for lexing some string
+
+
+//below is the "parser" that actually works, above is a testment to my stupidity and a monumental waste of time, literally everything there is useless
+let FoldParser (d:char) (chars:string) =
+  printfn "%A" chars
+  let _, tokens =
+    List.fold (fun (string, tokens) x ->  match x with
+                                          | x when x = d -> if string = "" then
+                                                              (string, CSVTOKEN.INVALID::tokens)
+                                                            else
+                                                              ("", INFO(string)::tokens)
+                                          | x -> (string+(x.ToString()), tokens)
+                                          | _ -> ("", tokens)) ("", []) (chars |> List.ofSeq)
+  printfn "%A" tokens
+  tokens

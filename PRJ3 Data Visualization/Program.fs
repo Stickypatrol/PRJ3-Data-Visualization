@@ -33,11 +33,10 @@ let delimiter = ','
 
 let parseFunc data =
   fun s ->
-    match SimplerLexer delimiter data with
-    | Success(result, s') -> Done(result,s)
-    | Fail(_) -> failwith "lexing failed"
+    match FoldParser delimiter data with
+    | result -> Done(result,s)
 
-let ReadFunction inputfile table i (*i is a counter for number of queries*)=
+let ReadFunction inputfile table i (*i is a counter for number of queries*) =
   let StartReading =
     fun s ->
       let sr = new StreamReader (@"./" + inputfile)
@@ -49,10 +48,11 @@ let ReadFunction inputfile table i (*i is a counter for number of queries*)=
     cor{
       if i > 0 then
         let! newline = getLine reader
-        let! parsedLine = parseFunc (newline |> List.ofSeq) //list with 1 entry, which is a list of CSV tokens
+        let! parsedLine = parseFunc newline //list with 1 entry, which is a list of CSV tokens
         //insert the insert query here as a coroutine, then just repeat it until it returns yield
         //do printfn "%A" i
         //printfn "%A" parsedLine
+        printfn "%A" parsedLine
         let x, date, code, _, _, district, neighbourhood, city, area, street, biketype, color =
             parsedLine.[0], parsedLine.[1], parsedLine.[2], parsedLine.[3], parsedLine.[4], parsedLine.[5], parsedLine.[6], parsedLine.[7], parsedLine.[8], parsedLine.[9], parsedLine.[22], parsedLine.[23]
         printfn "%A" parsedLine
@@ -78,7 +78,7 @@ let rec costep c s =
 //do costep (ReadFunction() 25) []
 [<EntryPoint>]
 let rec main argsv_old =
-    let argsv = [|"fietsen.csv"|]
+    let argsv = [|"fietsdiefstaldata.csv"|]
     printfn "%A" argsv
     if argsv.Length > 0 then
         try

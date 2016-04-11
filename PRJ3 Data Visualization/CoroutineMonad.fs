@@ -24,7 +24,7 @@ let cor = CoroutineBuilder()
 
 let yield_ = fun s -> Yield((fun s -> Done((), s)), s)
 
-let getState =
+let getCorState =
   fun s ->
     Done(s, s)
 

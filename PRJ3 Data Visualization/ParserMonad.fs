@@ -45,3 +45,7 @@ let repeatMultiParse p =
     let! xs = repeatParse p
     return x::xs
   }
+
+let getParState =
+  fun s ->
+    Success(s,s)
