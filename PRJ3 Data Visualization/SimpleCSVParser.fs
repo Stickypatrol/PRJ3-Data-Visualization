@@ -7,6 +7,12 @@ type CSVTOKEN =
   | DELIMITER
   | INFO of string
   | INVALID
+  with
+  member this.getValueUNSAFE =
+    match this with
+    | INFO(x) -> x
+    | DELIMITER -> failwith "there is a delimiter where it shouldnt be"
+    | INVALID -> "null"
 
 let fail_ x =
   fun s ->
@@ -124,14 +130,14 @@ let Transform lines =
 
 //below is the "parser" that actually works, above is a testment to my stupidity and a monumental waste of time, literally everything there is useless
 let FoldParser (d:char) (chars:string) =
-  printfn "%A" chars
+  //printfn "%A" chars
   let _, tokens =
     List.fold (fun (string, tokens) x ->  match x with
                                           | x when x = d -> if string = "" then
-                                                              (string, CSVTOKEN.INVALID::tokens)
+                                                              (string, tokens@[CSVTOKEN.INVALID])
                                                             else
-                                                              ("", INFO(string)::tokens)
+                                                              ("", tokens@[INFO(string)])
                                           | x -> (string+(x.ToString()), tokens)
                                           | _ -> ("", tokens)) ("", []) (chars |> List.ofSeq)
-  printfn "%A" tokens
+  //printfn "%A" tokens
   tokens
