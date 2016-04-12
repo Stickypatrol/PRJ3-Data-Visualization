@@ -69,7 +69,7 @@ let ReadFunction inputfile table i (*i is a counter for number of queries*) =
         //printfn "date %A code %A theft %A district %A neighbourhood %A city %A area %A street %A biketype %A color %A time %A" date code theftkind district neighbourhood city area street biketype bikemodel time
         //let district' = List.fold (fun s x -> if x <= '9') 0 district.getValueUNSAFE |> List.ofSeq
         SendTheftQuery date.getValueUNSAFE time.getValueUNSAFE street.getValueUNSAFE code.getValueUNSAFE biketype.getValueUNSAFE
-                  theftkind.getValueUNSAFE bikemodel.getValueUNSAFE district'.getValueUNSAFE
+                  theftkind.getValueUNSAFE bikemodel.getValueUNSAFE district'
         printfn "sent query! %i queries to go!" i
         do! yield_ //we can add a pause here for whichever reason
         if reader.EndOfStream then
