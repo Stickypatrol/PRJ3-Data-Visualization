@@ -48,8 +48,8 @@ let parseFunc data =
 let ReadFunction inputfile table i (*i is a counter for number of queries*) =
   let StartReading =
     fun s ->
-      let sr = new StreamReader (@"./" + inputfile)
-      Done(sr, s)
+        let sr = new StreamReader (@"./" + inputfile)
+        Done(sr, s)
   let getLine (sr:StreamReader) =
     fun s ->
       Done(sr.ReadLine(), s)
@@ -79,10 +79,15 @@ let ReadFunction inputfile table i (*i is a counter for number of queries*) =
       else
         return ()
     }
+  let FileCheck = fun s -> Done(File.Exists(@"./" + inputfile), s)
   cor{
-    let! reader = StartReading
-    let! _ = getLine reader
-    do! RecursiveReader reader i
+    let! fileExist = FileCheck
+    if fileExist then
+        let! reader = StartReading
+        let! _ = getLine reader
+        do! RecursiveReader reader i
+    else
+        return ()
   }
 
 let rec costep c s =
@@ -92,13 +97,13 @@ let rec costep c s =
 
 //do costep (ReadFunction() 25) []
 [<EntryPoint>]
-let rec main argsv_old =
-    let argsv = [|"fietsdiefstaldata.csv"|]
+let rec main argsv =
+    //let argsv = [|"fietsdiefstaldata.csv"|]
     printfn "%A" argsv
     if argsv.Length > 0 then
         try
             for x in 0..argsv.Length - 1 do
-                costep (ReadFunction argsv.[x] "thefts" 9500) ()
+                costep (ReadFunction argsv.[x] "thefts" 9900) ()
             0
         with
             | x ->  printfn "error happened: %A" (x.ToString())
