@@ -65,10 +65,11 @@ let ReadFunction inputfile table i (*i is a counter for number of queries*) =
         let _, date, code, theftkind, _, district, neighbourhood, city, area, street, biketype, bikemodel, time =
             parsedLine.[0], parsedLine.[1], parsedLine.[2], parsedLine.[3], parsedLine.[4], parsedLine.[5],
             parsedLine.[6], parsedLine.[7], parsedLine.[8], parsedLine.[9], parsedLine.[22], parsedLine.[23], parsedLine.[12]
+        let district' = Int32.Parse(List.fold (fun s x -> if x <= '9' && x >= '0' then s+(x.ToString()) else s) "" (district.getValueUNSAFE |> List.ofSeq))
         //printfn "date %A code %A theft %A district %A neighbourhood %A city %A area %A street %A biketype %A color %A time %A" date code theftkind district neighbourhood city area street biketype bikemodel time
         //let district' = List.fold (fun s x -> if x <= '9') 0 district.getValueUNSAFE |> List.ofSeq
         SendTheftQuery date.getValueUNSAFE time.getValueUNSAFE street.getValueUNSAFE code.getValueUNSAFE biketype.getValueUNSAFE
-                  theftkind.getValueUNSAFE bikemodel.getValueUNSAFE district.getValueUNSAFE
+                  theftkind.getValueUNSAFE bikemodel.getValueUNSAFE district'.getValueUNSAFE
         printfn "sent query! %i queries to go!" i
         do! yield_ //we can add a pause here for whichever reason
         if reader.EndOfStream then
